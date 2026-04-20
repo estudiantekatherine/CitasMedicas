@@ -1,21 +1,29 @@
 package cr.ac.ucenfotec.bl.entities.cita;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
- * Representa una receta médica emitida durante una cita
+ * Representa una receta médica emitida durante una cita.
  *
+ * <p><b>Concepto POO — Agregación:</b> La receta es creada por el
+ * {@link cr.ac.ucenfotec.bl.logic.Service} y luego asignada a una
+ * {@link Cita} al momento de atender al paciente. La receta podría
+ * existir conceptualmente de forma independiente a la cita.</p>
+ *
+ * <p><b>Concepto POO — Identidad de objetos:</b> Dos recetas son iguales
+ * si comparten el mismo código único de receta.</p>
  *
  */
 public class Receta {
 
-    /** Código único que identifica la receta */
+    /** Código único que identifica la receta (p.ej. "REC-001") */
     private String codigoReceta;
 
-    /** Lista de medicamentos prescritos separados por coma */
+    /** Lista de medicamentos prescritos, separados por coma */
     private String listaMedicamentos;
 
-    /** Indicaciones de dosis para cada medicamento*/
+    /** Indicaciones de dosis para cada medicamento prescrito */
     private String indicacionesDosis;
 
     /** Instrucciones de uso adicionales para el paciente */
@@ -24,9 +32,11 @@ public class Receta {
     /** Fecha en que fue emitida la receta */
     private LocalDate fechaEmision;
 
+
     // Constructores
-    /**
-     * Constructor por defecto
+     /**
+     * Constructor por defecto.
+     * Inicializa los textos con cadena vacía y la fecha con el día actual.
      */
     public Receta() {
         this.codigoReceta      = "";
@@ -37,13 +47,13 @@ public class Receta {
     }
 
     /**
-     * Constructor que inicializa todos los atributos de la receta
+     * Constructor que inicializa todos los atributos de la receta.
      *
-     * @param codigoReceta      Código único de la receta
-     * @param listaMedicamentos Medicamentos prescritos
-     * @param indicacionesDosis Dosis de cada medicamento
-     * @param instruccionesUso  Instrucciones de uso para el paciente
-     * @param fechaEmision      Fecha de emisión de la receta
+     * @param codigoReceta      Código único de la receta.
+     * @param listaMedicamentos Medicamentos prescritos (separados por coma).
+     * @param indicacionesDosis Dosis indicada para cada medicamento.
+     * @param instruccionesUso  Instrucciones de uso para el paciente.
+     * @param fechaEmision      Fecha de emisión de la receta.
      */
     public Receta(String codigoReceta, String listaMedicamentos,
                   String indicacionesDosis, String instruccionesUso,
@@ -55,84 +65,116 @@ public class Receta {
         this.fechaEmision      = fechaEmision;
     }
 
-    // Getters y Setters
 
-    /**
-     * Retorna el código de la receta
-     * @return Código único de la receta
+    // Getters y Setters
+       /**
+     * Retorna el código único de la receta.
+     * @return Código de la receta.
      */
     public String getCodigoReceta() {
-        return codigoReceta; }
+        return codigoReceta;
+    }
 
     /**
-     * Establece el código de la receta
-     * @param codigoReceta Nuevo código de la receta
+     * Establece el código único de la receta.
+     * @param codigoReceta Nuevo código de la receta.
      */
     public void setCodigoReceta(String codigoReceta) {
-        this.codigoReceta = codigoReceta; }
+        this.codigoReceta = codigoReceta;
+    }
 
     /**
-     * Retorna la lista de medicamentos prescritos
-     * @return Lista de medicamentos como cadena de texto
+     * Retorna la lista de medicamentos prescritos.
+     * @return Medicamentos como cadena de texto separada por comas.
      */
     public String getListaMedicamentos() {
-        return listaMedicamentos; }
+        return listaMedicamentos;
+    }
 
     /**
-     * Establece la lista de medicamentos prescritos
-     * @param listaMedicamentos Medicamentos separados por coma
+     * Establece la lista de medicamentos prescritos.
+     * @param listaMedicamentos Medicamentos separados por coma.
      */
     public void setListaMedicamentos(String listaMedicamentos) {
         this.listaMedicamentos = listaMedicamentos;
     }
 
     /**
-     * Retorna las indicaciones de dosis
-     * @return Indicaciones de dosis para cada medicamento
+     * Retorna las indicaciones de dosis para cada medicamento.
+     * @return Indicaciones de dosis.
      */
     public String getIndicacionesDosis() {
-        return indicacionesDosis; }
+        return indicacionesDosis;
+    }
 
     /**
-     * Establece las indicaciones de dosis
-     * @param indicacionesDosis Dosis de cada medicamento
+     * Establece las indicaciones de dosis.
+     * @param indicacionesDosis Dosis de cada medicamento prescrito.
      */
     public void setIndicacionesDosis(String indicacionesDosis) {
         this.indicacionesDosis = indicacionesDosis;
     }
 
     /**
-     * Retorna las instrucciones de uso adicionales
-     * @return Instrucciones de uso para el paciente
+     * Retorna las instrucciones de uso adicionales para el paciente.
+     * @return Instrucciones de uso.
      */
     public String getInstruccionesUso() {
-        return instruccionesUso; }
+        return instruccionesUso;
+    }
 
     /**
      * Establece las instrucciones de uso adicionales.
-     * @param instruccionesUso Instrucciones de uso para el paciente
+     * @param instruccionesUso Instrucciones de uso para el paciente.
      */
     public void setInstruccionesUso(String instruccionesUso) {
         this.instruccionesUso = instruccionesUso;
     }
 
     /**
-     * Retorna la fecha de emisión de la receta
+     * Retorna la fecha de emisión de la receta.
      * @return Fecha de emisión como {@link LocalDate}.
      */
     public LocalDate getFechaEmision() {
-        return fechaEmision; }
+        return fechaEmision;
+    }
 
     /**
-     * Establece la fecha de emisión de la receta
-     * @param fechaEmision Nueva fecha de emisión
+     * Establece la fecha de emisión de la receta.
+     * @param fechaEmision Nueva fecha de emisión.
      */
     public void setFechaEmision(LocalDate fechaEmision) {
-        this.fechaEmision = fechaEmision; }
+        this.fechaEmision = fechaEmision;
+    }
+
+
+    // Identidad de objetos
+      /**
+     * Dos recetas son iguales si comparten el mismo código único de receta.
+     *
+     * @param objeto Objeto a comparar.
+     * @return {@code true} si ambas tienen el mismo código de receta.
+     */
+    @Override
+    public boolean equals(Object objeto) {
+        if (this == objeto) return true;
+        if (objeto == null || getClass() != objeto.getClass()) return false;
+        Receta otraReceta = (Receta) objeto;
+        return Objects.equals(codigoReceta, otraReceta.codigoReceta);
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigoReceta);
+    }
+
 
     // toString
-    /**
-     * @return Cadena con los atributos de la receta
+     /**
+     * Retorna una representación textual completa de la receta.
+     *
+     * @return Cadena con todos los atributos de la receta.
      */
     @Override
     public String toString() {

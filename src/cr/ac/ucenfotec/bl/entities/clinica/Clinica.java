@@ -7,7 +7,17 @@ import cr.ac.ucenfotec.bl.entities.persona.Paciente;
 import java.util.ArrayList;
 
 /**
- * Representa la clínica médica
+ * Representa la clínica médica central del sistema.
+ *
+ * <p><b>Concepto POO — Agregación:</b> La clínica <em>agrega</em> médicos,
+ * pacientes y citas que existen de forma independiente. Si la clínica se
+ * elimina, los médicos y pacientes podrían existir en otro contexto.
+ * La relación es todo–parte débil.</p>
+ *
+ * <p><b>Concepto POO — Modularidad:</b> La clínica actúa como contenedor
+ * central de las listas de entidades, separando la responsabilidad de
+ * almacenamiento de la lógica de negocio que vive en
+ * {@link cr.ac.ucenfotec.bl.logic.Service}.</p>
  *
  */
 public class Clinica {
@@ -22,36 +32,48 @@ public class Clinica {
     private String telefonoClinica;
 
     /**
-     * Lista de médicos registrados en la clínica
+     * Lista de médicos registrados en la clínica.
+     *
+     * <p><b>Agregación:</b> Los médicos pertenecen a la clínica pero
+     * tienen existencia propia.</p>
      */
     private ArrayList<Medico> listaMedicos;
 
     /**
-     * Lista de pacientes registrados en la clínica
+     * Lista de pacientes registrados en la clínica.
+     *
+     * <p><b>Agregación:</b> Los pacientes pertenecen a la clínica pero
+     * tienen existencia propia.</p>
      */
     private ArrayList<Paciente> listaPacientes;
 
     /**
-     * Lista de citas registradas en el sistema de la clínica
+     * Lista de citas registradas en el sistema de la clínica.
+     *
+     * <p><b>Agregación:</b> Las citas pertenecen a la clínica y
+     * referencian médicos y pacientes existentes.</p>
      */
     private ArrayList<Cita> listaCitas;
 
+
     // Constructores
+
     /**
-     * Constructor por defecto
+     * Constructor por defecto.
+     * Inicializa las tres listas vacías para evitar {@code NullPointerException}.
      */
     public Clinica() {
-        this.listaMedicos     = new ArrayList<>();
-        this.listaPacientes   = new ArrayList<>();
-        this.listaCitas       = new ArrayList<>();
+        this.listaMedicos   = new ArrayList<>();
+        this.listaPacientes = new ArrayList<>();
+        this.listaCitas     = new ArrayList<>();
     }
 
     /**
-     * Constructor que inicializa los datos de la clínica
+     * Constructor que inicializa los datos identificadores de la clínica.
      *
-     * @param nombreClinica    Nombre oficial de la clínica
-     * @param direccionClinica Dirección física de la clínica
-     * @param telefonoClinica  Teléfono principal de la clínica
+     * @param nombreClinica    Nombre oficial de la clínica.
+     * @param direccionClinica Dirección física de la clínica.
+     * @param telefonoClinica  Número de teléfono principal.
      */
     public Clinica(String nombreClinica, String direccionClinica, String telefonoClinica) {
         this.nombreClinica    = nombreClinica;
@@ -64,57 +86,63 @@ public class Clinica {
 
     // Getters y Setters
     /**
-     * Retorna el nombre de la clínica
-     * @return Nombre oficial de la clínica
+     * Retorna el nombre oficial de la clínica.
+     * @return Nombre de la clínica.
      */
     public String getNombreClinica() {
-        return nombreClinica; }
+        return nombreClinica;
+    }
 
     /**
-     * Establece el nombre de la clínica
-     * @param nombreClinica Nuevo nombre oficial
+     * Establece el nombre oficial de la clínica.
+     * @param nombreClinica Nuevo nombre de la clínica.
      */
     public void setNombreClinica(String nombreClinica) {
-        this.nombreClinica = nombreClinica; }
+        this.nombreClinica = nombreClinica;
+    }
 
     /**
-     * Retorna la dirección de la clínica
-     * @return Dirección física de la clínica
+     * Retorna la dirección física de la clínica.
+     * @return Dirección de la clínica.
      */
     public String getDireccionClinica() {
-        return direccionClinica; }
+        return direccionClinica;
+    }
 
     /**
-     * Establece la dirección de la clínica
-     * @param direccionClinica Nueva dirección física
+     * Establece la dirección física de la clínica.
+     * @param direccionClinica Nueva dirección de la clínica.
      */
     public void setDireccionClinica(String direccionClinica) {
         this.direccionClinica = direccionClinica;
     }
 
     /**
-     * Retorna el teléfono de la clínica
-     * @return Número de teléfono principal
+     * Retorna el número de teléfono principal de la clínica.
+     * @return Teléfono de la clínica.
      */
     public String getTelefonoClinica() {
-        return telefonoClinica; }
+        return telefonoClinica;
+    }
 
     /**
-     * Establece el teléfono de la clínica
-     * @param telefonoClinica Nuevo número de teléfono
+     * Establece el número de teléfono principal de la clínica.
+     * @param telefonoClinica Nuevo número de teléfono.
      */
     public void setTelefonoClinica(String telefonoClinica) {
         this.telefonoClinica = telefonoClinica;
     }
 
     /**
-     * @return {@link ArrayList} de objetos {@link Medico}
+     * Retorna la lista de médicos registrados en la clínica.
+     * @return {@link ArrayList} de objetos {@link Medico}.
      */
     public ArrayList<Medico> getListaMedicos() {
-        return listaMedicos; }
+        return listaMedicos;
+    }
 
     /**
-     * Establece la lista de médicos.
+     * Establece la lista completa de médicos de la clínica.
      * @param listaMedicos Nueva lista de médicos.
      */
     public void setListaMedicos(ArrayList<Medico> listaMedicos) {
@@ -122,14 +150,15 @@ public class Clinica {
     }
 
     /**
-     * Retorna la lista de pacientes registrados (AGREGACIÓN).
+     * Retorna la lista de pacientes registrados en la clínica.
      * @return {@link ArrayList} de objetos {@link Paciente}.
      */
     public ArrayList<Paciente> getListaPacientes() {
-        return listaPacientes; }
+        return listaPacientes;
+    }
 
     /**
-     * Establece la lista de pacientes.
+     * Establece la lista completa de pacientes de la clínica.
      * @param listaPacientes Nueva lista de pacientes.
      */
     public void setListaPacientes(ArrayList<Paciente> listaPacientes) {
@@ -137,20 +166,29 @@ public class Clinica {
     }
 
     /**
-     * Retorna la lista de citas registradas (AGREGACIÓN).
+     * Retorna la lista de citas registradas en la clínica.
      * @return {@link ArrayList} de objetos {@link Cita}.
      */
     public ArrayList<Cita> getListaCitas() {
-        return listaCitas; }
+        return listaCitas;
+    }
 
     /**
-     * Establece la lista de citas.
+     * Establece la lista completa de citas de la clínica.
      * @param listaCitas Nueva lista de citas.
      */
     public void setListaCitas(ArrayList<Cita> listaCitas) {
-        this.listaCitas = listaCitas; }
+        this.listaCitas = listaCitas;
+    }
+
 
     // toString
+
+    /**
+     * Retorna un resumen de los datos y conteos de la clínica.
+     *
+     * @return Cadena con nombre, dirección, teléfono y cantidad de registros.
+     */
     @Override
     public String toString() {
         return  "  Nombre clínica  : " + nombreClinica              + "\n" +
